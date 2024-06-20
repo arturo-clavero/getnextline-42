@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artclave <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arturo <arturo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:38:48 by artclave          #+#    #+#             */
-/*   Updated: 2023/10/30 21:56:44 by artclave         ###   ########.fr       */
+/*   Updated: 2024/06/20 12:55:25 by arturo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ int	read_buffer(t_list **head, int fd)
 	bytes = 0;
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return ((int)dealloc(head, NULL));
+		return (*(int *)dealloc(head, NULL));
 	while (find_nl_char(*head) < 1)
 	{
 		bytes = (int)read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1 || (bytes == 0 && *head == NULL))
-			return ((int)dealloc(head, buffer));
+			return (*(int *)dealloc(head, buffer));
 		if (bytes == 0)
 			break ;
 		buffer[bytes] = '\0';
 		if (!buffer_to_stash(buffer, head))
-			return ((int)dealloc(head, buffer));
+			return (*(int *)dealloc(head, buffer));
 	}
 	free (buffer);
 	return (1);
@@ -108,7 +108,7 @@ int	clean_stash(t_list **head)
 	t_list	*curr;
 
 	if (find_nl_char(*head) < 0)
-		return ((int)dealloc(head, NULL) + 1);
+		return (*(int *)dealloc(head, NULL) + 1);
 	curr = *head;
 	while (curr != NULL)
 	{
@@ -120,6 +120,6 @@ int	clean_stash(t_list **head)
 		curr = curr->next;
 	}
 	if (curr->content[++i] == '\0')
-		return ((int)dealloc(head, NULL) + 1);
+		return (*(int *)dealloc(head, NULL) + 1);
 	return (save_leftover_chars(head, curr, i));
 }
