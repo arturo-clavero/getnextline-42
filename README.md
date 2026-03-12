@@ -279,4 +279,4 @@ Where `n` is the number of characters before the next newline.
 This project was completed as part of the 42 School curriculum. It is intended for educational and portfolio purposes.
 
 
-[Back to top](#printf)
+[Back to top](#get_next_line)
